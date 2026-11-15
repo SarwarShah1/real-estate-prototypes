@@ -272,3 +272,5 @@ body.is-home.over .nav.open{background:rgba(12,22,18,.92)}
 @media(max-width:700px){.hero-c{padding:120px 6vw 110px;gap:18px}.hero-c .row{flex-direction:column;align-self:stretch}.hero-c .btn{width:100%}.hv-btn{bottom:84px}.hv-down{bottom:86px}}
 @media(prefers-reduced-motion:reduce){.hv-in{animation:none;opacity:1;transform:none}.hv-down span{animation:none}}
 .hero-c{max-width:1240px}.hero-c h1{font-size:clamp(50px,7.6vw,108px)}.hero-c p{text-wrap:balance}
+@media(max-width:700px){.hv-down{display:none}.hero-c{padding-bottom:150px}.hv-btn{bottom:78px;width:42px;height:42px}}
+@media(max-height:640px) and (min-width:701px){.hv-down{display:none}}
