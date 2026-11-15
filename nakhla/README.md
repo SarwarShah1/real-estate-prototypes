@@ -16,3 +16,5 @@ Run locally: `python3 -m http.server 8080`, then open http://localhost:8080
 GitHub Pages: push this folder to a repo, then Settings > Pages > deploy from branch `main`, folder `/`.
 
 All figures, licence numbers and contacts are sample values. Forms do not send anything.
+
+Home page video: `media/nakhla-hero.mp4` (desktop) and `media/nakhla-hero-sm.mp4` (phones), a 17-second muted loop cut from free Pexels clips. Set `VIDEO.src` to "" in `js/content.js` to show the hero photo instead.

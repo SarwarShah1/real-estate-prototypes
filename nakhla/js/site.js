@@ -44,12 +44,23 @@ function visitSection() {
 }
 
 /* ---------- pages ---------- */
+function heroMedia() {
+  if (!VIDEO.src) return ph("hero", T("villa and pool at dusk", "فيلا ومسبح وقت الغروب"));
+  return `<div class="ph has hv-poster"><img src="${esc(VIDEO.poster || PHOTOS.hero)}" alt="" onerror="this.src='${esc(PHOTOS.hero)}'"></div>
+    <video class="hv" muted loop playsinline preload="none" aria-hidden="true" data-src="${esc(VIDEO.src)}" data-src-sm="${esc(VIDEO.srcMobile || VIDEO.src)}"></video>`;
+}
 function pageHome() {
-  return `<section class="hero">${ph("hero", T("villa and pool at dusk", "فيلا ومسبح وقت الغروب"))}
-    <div class="hero-in"><div class="eyebrow">${T("A gated villa community · North Riyadh", "مجمع فلل مسوّر · شمال الرياض")}</div>
-      <h1>${T("A garden behind the walls of the city", "حديقة خلف أسوار المدينة")}</h1>
-      <p class="soft">${T("Eighty-nine villas around a shaded central park, managed and maintained by a team that lives on site.", "تسع وثمانون فيلا حول منتزه مظلل، يديرها ويصونها فريق يقيم في المجمع.")}</p>
-      <div class="row"><a class="btn btn-brass" href="#contact">${T("Book a private viewing", "احجز معاينة خاصة")}</a><a class="btn btn-line" href="#villas">${T("See the villas", "شاهد الفلل")}</a></div></div></section>
+  return `<section class="hero hero-v">${heroMedia()}
+    <div class="hero-c"><div class="eyebrow hv-in" style="--d:.1s">${T("Welcome to", "أهلاً بكم في")}</div>
+      <h1 class="hv-in" style="--d:.25s">${L(SITE.name)}</h1>
+      <div class="hv-rule hv-in" style="--d:.4s"></div>
+      <p class="hv-in" style="--d:.5s">${T("Villas for sale and rent in a gated garden community, North Riyadh", "فلل للبيع والإيجار في مجمع مسوّر تحيط به الحدائق، شمال الرياض")}</p>
+      <div class="row hv-in" style="--d:.65s;justify-content:center"><a class="btn btn-brass" href="#contact">${T("Book a private viewing", "احجز معاينة خاصة")}</a><a class="btn btn-line" href="#villas">${T("See the villas", "شاهد الفلل")}</a></div></div>
+    ${VIDEO.src ? `<button class="hv-btn" data-hv aria-label="${T("Pause the video", "إيقاف الفيديو")}"><span class="hv-ico"></span></button>` : ""}
+    <a class="hv-down" href="#intro" data-scroll aria-label="${T("Scroll down", "انزل للأسفل")}"><span></span></a></section>
+  <section class="sec intro" id="intro"><div class="eyebrow">${T("A gated villa community · North Riyadh", "مجمع فلل مسوّر · شمال الرياض")}</div>
+    <h2>${T("A garden behind the walls of the city", "حديقة خلف أسوار المدينة")}</h2>
+    <p class="soft">${T("Eighty-nine villas around a shaded central park, managed and maintained by a team that lives on site.", "تسع وثمانون فيلا حول منتزه مظلل، يديرها ويصونها فريق يقيم في المجمع.")}</p></section>
   <section class="stats">
     <div><b>${num(89)}</b><span class="caps mute">${T("Villas, three layouts", "فيلا بثلاثة نماذج")}</span></div>
     <div><b>${num("30,600")} ${T("m²", "م²")}</b><span class="caps mute">${T("Of landscaped grounds", "من المساحات المنسقة")}</span></div>
@@ -326,7 +337,7 @@ function chrome() {
     <div><h4>${T("Explore", "استكشف")}</h4>${NAV.map(([k, e, a]) => `<a href="#${k}">${T(e, a)}</a>`).join("")}<a href="#brochure">${T("Brochure", "الكتيّب")}</a></div>
     <div><h4>${T("Villas", "الفلل")}</h4>${VILLAS.map((v) => `<a href="#villa-${v.id}">${L(v.name)}</a>`).join("")}</div>
     <div><h4>${T("Contact", "تواصل")}</h4><a href="tel:${SITE.phone.replace(/\s/g, "")}">${num(SITE.phone)}</a><a href="mailto:${SITE.email}">${SITE.email}</a><span>${L(SITE.hours)}</span></div></div>
-    <div class="ft-b"><span>${T("FAL licence", "رخصة فال")} ${num(SITE.fal)} · ${T("CR", "سجل تجاري")} ${num(SITE.cr)}</span><span>${T("Sample brand for demonstration. All figures and licence numbers are examples. Photos: Unsplash.", "علامة تجريبية للعرض. جميع الأرقام والتراخيص أمثلة. الصور من Unsplash.")}</span></div>`;
+    <div class="ft-b"><span>${T("FAL licence", "رخصة فال")} ${num(SITE.fal)} · ${T("CR", "سجل تجاري")} ${num(SITE.cr)}</span><span>${T("Sample brand for demonstration. All figures and licence numbers are examples. Photos: Unsplash. Video: Pexels.", "علامة تجريبية للعرض. جميع الأرقام والتراخيص أمثلة. الصور من Unsplash والفيديو من Pexels.")}</span></div>`;
   $("#mbar").innerHTML = `<a href="tel:${SITE.phone.replace(/\s/g, "")}">${T("Call", "اتصال")}</a><a target="_blank" rel="noopener" href="${wa(T("Hello", "السلام عليكم"))}">${T("WhatsApp", "واتساب")}</a><a href="#contact">${T("Book a viewing", "احجز معاينة")}</a>`;
 }
 function render() {
@@ -338,7 +349,12 @@ function render() {
   document.body.classList.toggle("is-bro", key === "brochure" && S.bro);
   chrome();
   const pages = { home: pageHome, villas: pageVillas, masterplan: pageMasterplan, life: pageLife, location: pageLocation, gallery: pageGallery, faq: pageFaq, brochure: pageBrochure, contact: pageContact };
+  const oldVid = $("#app .hv");
   $("#app").innerHTML = r.startsWith("villa-") ? pageVilla(r.slice(6)) : (pages[key] || pageHome)();
+  const isHome = !pages[key] || key === "home";
+  document.body.classList.toggle("is-home", isHome && !r.startsWith("villa-"));
+  const nv2 = $("#app .hv"); if (oldVid && nv2) nv2.replaceWith(oldVid);
+  heroVideo(); headerState();
 }
 
 document.addEventListener("click", (e) => {
@@ -389,6 +405,33 @@ document.addEventListener("submit", (e) => {
   const text = T(`Viewing request${ref ? " for " + ref : ""}\nName: ${name}\nMobile: ${phone}${day ? "\nDay: " + day : ""}${mode ? "\nInterested in: " + mode : ""}`, `طلب معاينة${ref ? " – " + ref : ""}\nالاسم: ${name}\nالجوال: ${phone}${day ? "\nاليوم: " + day : ""}`);
   f.insertAdjacentHTML("beforeend", `<div class="msg" role="status"><strong style="font-weight:500">${T("Thank you. Your request is ready.", "شكراً لك. طلبك جاهز.")}</strong><span class="mute">${T("This is a demonstration site, so nothing has been sent. On a client site the request reaches the leasing team by email and WhatsApp.", "هذا موقع تجريبي ولم يُرسل شيء. في موقع العميل يصل الطلب لفريق التأجير بالبريد والواتساب.")}</span><a class="link" target="_blank" rel="noopener" href="${wa(text)}">${T("Send it on WhatsApp", "أرسله عبر واتساب")}</a></div>`);
 });
+/* ---------- hero video ---------- */
+const quiet = () => matchMedia("(prefers-reduced-motion: reduce)").matches || (navigator.connection && navigator.connection.saveData);
+function heroVideo() {
+  const v = $("#app .hv"); if (!v) return;
+  const btn = $("[data-hv]");
+  if (!v.src && !S.vidPaused && !quiet()) { v.src = innerWidth < 760 ? v.dataset.srcSm : v.dataset.src; v.preload = "auto"; }
+  if (!v.dataset.wired) {
+    v.dataset.wired = 1;
+    v.addEventListener("playing", () => v.closest(".hero").classList.add("playing"));
+    v.addEventListener("error", () => { v.remove(); $("[data-hv]")?.remove(); });
+  }
+  if (v.src && !S.vidPaused) { const p = v.play(); if (p) p.catch(() => {}); }
+  if (btn) { const paused = S.vidPaused || quiet(); btn.classList.toggle("paused", paused); btn.setAttribute("aria-label", paused ? T("Play the video", "تشغيل الفيديو") : T("Pause the video", "إيقاف الفيديو")); }
+  if (v.src && v.readyState > 2 && !v.paused) v.closest(".hero").classList.add("playing");
+}
+function headerState() { document.body.classList.toggle("over", document.body.classList.contains("is-home") && scrollY < 40); }
+addEventListener("scroll", headerState, { passive: true });
+document.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-hv]");
+  if (b) { const v = $("#app .hv"); S.vidPaused = !S.vidPaused;
+    if (S.vidPaused) v && v.pause(); else { if (v && !v.src) { v.src = innerWidth < 760 ? v.dataset.srcSm : v.dataset.src; } v && v.play().catch(() => {}); }
+    heroVideo(); return; }
+  const d = e.target.closest("[data-scroll]");
+  if (d) { e.preventDefault(); document.getElementById(d.getAttribute("href").slice(1)).scrollIntoView({ behavior: "smooth" }); }
+});
+document.addEventListener("visibilitychange", () => { const v = $("#app .hv"); if (v && v.src && !S.vidPaused) document.hidden ? v.pause() : v.play().catch(() => {}); });
+
 function applyRoute() {
   const r = route();
   if (r.startsWith("masterplan-")) { const t = r.slice(11); if (villa(t)) { S.mtype = t; S.mavail = false; } }

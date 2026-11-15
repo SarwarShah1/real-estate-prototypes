@@ -239,3 +239,36 @@ button.link{font:inherit;font-size:13px;letter-spacing:.14em;text-transform:uppe
 .calc .seg{align-self:flex-start}
 .mp-hint{display:none;font-size:13px;color:var(--mute)}
 @media(max-width:760px){.mp-hint{display:block}}
+
+/* ---------- home: full-screen video hero (like Carolina Palms) ---------- */
+body.is-home #header{position:fixed;inset-inline:0;top:0;transition:background .3s,border-color .3s}
+body.is-home.over #header{background:transparent;border-color:transparent;backdrop-filter:none}
+body.is-home.over #header .brand,body.is-home.over #header .nav a,body.is-home.over #header .lang{color:#fff}
+body.is-home.over #header .lang{border-color:rgba(255,255,255,.6)}
+body.is-home.over #header .btn-ghost{border-color:#fff;color:#fff}body.is-home.over #header .btn-ghost:hover{background:#fff;color:#1B2420}
+body.is-home.over .menu-btn{border-color:rgba(255,255,255,.6)}body.is-home.over .menu-btn span,body.is-home.over .menu-btn span::before{background:#fff}
+body.is-home.over .nav.open{background:rgba(12,22,18,.92)}
+.hero-v{min-height:100vh;min-height:100svh;align-items:center;justify-content:center;text-align:center;overflow:hidden;border:0}
+.hero-v .hv-poster{position:absolute;inset:0;border:0}
+.hero-v .hv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease}
+.hero-v.playing .hv{opacity:1}
+.hero-v::after{background:linear-gradient(180deg,rgba(10,18,15,.45) 0%,rgba(10,18,15,.22) 35%,rgba(10,18,15,.35) 70%,rgba(10,18,15,.6) 100%)}
+.hero-c{position:relative;z-index:2;padding:140px var(--pad) 120px;max-width:1100px;display:flex;flex-direction:column;align-items:center;gap:22px;color:#fff}
+.hero-c .eyebrow{color:#fff;font-size:15px;letter-spacing:.32em}
+.hero-c h1{font-size:clamp(52px,9vw,128px);font-weight:400;letter-spacing:.01em;text-shadow:0 2px 30px rgba(0,0,0,.25)}
+.hero-c p{font-size:clamp(17px,1.6vw,21px);max-width:620px;color:#F1F4F2}
+.hv-rule{width:72px;height:1px;background:rgba(255,255,255,.8)}
+.hv-in{opacity:0;transform:translateY(18px);animation:hvIn 1s cubic-bezier(.2,.7,.2,1) var(--d,0s) forwards}
+@keyframes hvIn{to{opacity:1;transform:none}}
+.hv-btn{position:absolute;z-index:3;bottom:28px;inset-inline-end:var(--pad);width:46px;height:46px;border:1px solid rgba(255,255,255,.7);border-radius:50%;display:grid;place-items:center;color:#fff}
+.hv-btn:hover{background:rgba(255,255,255,.15)}
+.hv-ico{width:12px;height:14px;border-inline:3px solid #fff}
+.hv-btn.paused .hv-ico{width:0;height:0;border:0;border-block:8px solid transparent;border-left:13px solid #fff;margin-left:4px}
+.hv-down{position:absolute;z-index:3;bottom:30px;left:50%;transform:translateX(-50%);width:26px;height:42px;border:1px solid rgba(255,255,255,.7);border-radius:14px}
+.hv-down span{position:absolute;left:50%;top:9px;width:2px;height:8px;margin-left:-1px;background:#fff;border-radius:2px;animation:hvDot 1.8s ease-in-out infinite}
+@keyframes hvDot{0%{opacity:0;transform:translateY(0)}40%{opacity:1}100%{opacity:0;transform:translateY(12px)}}
+.intro{text-align:center;display:flex;flex-direction:column;align-items:center;gap:20px;border-bottom:1px solid var(--line)}
+.intro p{max-width:600px;font-size:19px}
+@media(max-width:700px){.hero-c{padding:120px 6vw 110px;gap:18px}.hero-c .row{flex-direction:column;align-self:stretch}.hero-c .btn{width:100%}.hv-btn{bottom:84px}.hv-down{bottom:86px}}
+@media(prefers-reduced-motion:reduce){.hv-in{animation:none;opacity:1;transform:none}.hv-down span{animation:none}}
+.hero-c{max-width:1240px}.hero-c h1{font-size:clamp(50px,7.6vw,108px)}.hero-c p{text-wrap:balance}

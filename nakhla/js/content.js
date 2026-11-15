@@ -27,6 +27,15 @@ const PHOTOS = {
   gate: "https://images.unsplash.com/photo-1674222709212-a6a7e378ac40?auto=format&fit=crop&w=1400&q=75"           // entrance gate
 };
 
+/* HERO VIDEO — short muted loop behind the home page title.
+   Leave src empty to show the hero photo instead. The poster shows while it loads. */
+const VIDEO = {
+  src: "media/nakhla-hero.mp4",          // 1280 wide, for laptops and desktops
+  srcMobile: "media/nakhla-hero-sm.mp4", // 854 wide, for phones
+  poster: "media/nakhla-hero.jpg",
+  credit: "Video clips from Pexels (free licence)"
+};
+
 const SITE = {
   name: { en: "Nakhla Residences", ar: "نخلة ريزيدنس" },
   whatsapp: "966500000000",
