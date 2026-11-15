@@ -95,3 +95,61 @@ const NEARBY = [
   [["Metro station", "محطة المترو"], 6],
   [["Hospitals and clinics", "المستشفيات والعيادات"], 10]
 ];
+
+/* MASTERPLAN — one letter per plot, in plot order for each villa type.
+   A = available, R = reserved, S = sold. Change a letter to update the map.
+   The number of available plots (A) is also shown on the villa pages, so the
+   "available" counts in VILLAS above are worked out from these strings. */
+const PLOT_STATUS = {
+  sidr: "SSASSRSAASAR",                                      // 12 plots facing the park
+  ghaf: "ASSRASSSSSSARSRSASSSSRSSSAAAS",                     // 29 plots on the garden lanes
+  talh: "SSASSSSAARSSSSSRSASASSSSSRASSSSSRAASSRSSARSSSASA"   // 48 plots on the outer lanes
+};
+
+/* PAYMENT — example figures for the calculator on each villa page. */
+const PAYMENT = {
+  rate: 4.5,          // example yearly rate, %
+  minDown: 10,        // smallest down payment, %
+  maxDown: 50,
+  years: 20,          // default term
+  maxYears: 25,
+  rentSplits: [1, 2, 4],
+  deposit: 5,         // rent security deposit, % of yearly rent
+  reserveDays: 14,    // how long a reservation deposit holds a plot
+  serviceCharge: 18   // SAR per m² of built area per year
+};
+
+/* FAQ — questions grouped by topic. Answers are sample text. */
+const FAQ = [
+  { g: ["Buying", "الشراء"], items: [
+    [["Are the villas ready to move in?", "هل الفلل جاهزة للسكن؟"],
+     ["Yes. Every villa is complete and handed over with its title deed. You can move in as soon as the sale or the rent contract is signed.", "نعم. جميع الفلل مكتملة وتُسلَّم مع الصك. يمكنك السكن فور توقيع عقد البيع أو الإيجار."]],
+    [["Can I buy with a mortgage?", "هل يمكنني الشراء بتمويل عقاري؟"],
+     ["Yes. Most Saudi banks finance villas in the compound, usually with a down payment of at least 10%. The calculator on each villa page gives an example, and our sales team can introduce you to partner banks.", "نعم. معظم البنوك السعودية تموّل فلل المجمع، وغالباً بدفعة أولى لا تقل عن ١٠٪. الحاسبة في صفحة كل فيلا تعطي مثالاً، وفريق المبيعات يعرّفك بالبنوك الشريكة."]],
+    [["Can I reserve a specific plot?", "هل يمكنني حجز قطعة معينة؟"],
+     ["Yes. Pick an available plot on the masterplan and book a viewing. A refundable reservation deposit holds the plot for 14 days while your paperwork is prepared.", "نعم. اختر قطعة متاحة من المخطط العام واحجز معاينة. عربون حجز مسترد يحفظ القطعة ١٤ يوماً حتى تجهيز الأوراق."]],
+    [["Is there a yearly service charge?", "هل توجد رسوم خدمات سنوية؟"],
+     ["Owners pay 18 SAR per square metre of built area each year. It covers security, landscaping, the pools and gyms, and upkeep of every shared area.", "يدفع الملاك ١٨ ريالاً عن كل متر مربع من مسطح البناء سنوياً، وتشمل الأمن وتنسيق الحدائق والمسابح والأندية وصيانة المرافق المشتركة."]]
+  ] },
+  { g: ["Renting", "الإيجار"], items: [
+    [["How is the rent paid?", "كيف تُدفع الإيجارات؟"],
+     ["Rent is yearly, paid in one, two or four instalments. A security deposit of 5% of the yearly rent is returned when you leave.", "الإيجار سنوي، يُدفع على دفعة أو دفعتين أو أربع دفعات، مع تأمين بنسبة ٥٪ من الإيجار السنوي يُسترد عند الخروج."]],
+    [["Is the contract registered in Ejar?", "هل العقد موثق في منصة إيجار؟"],
+     ["Yes. Every rent contract is registered on the Ejar platform, so both sides are protected and payments can be made through Ejar.", "نعم. جميع عقود الإيجار موثقة في منصة إيجار لحماية الطرفين، ويمكن السداد من خلالها."]],
+    [["Are the villas furnished?", "هل الفلل مفروشة؟"],
+     ["Villas come with a fitted kitchen, appliances and central air conditioning. Furniture is not included, but we can arrange a furnishing package.", "تُسلَّم الفلل بمطبخ مجهز وأجهزة وتكييف مركزي، دون أثاث، ويمكننا ترتيب باقة تأثيث عند الطلب."]]
+  ] },
+  { g: ["Living here", "السكن في المجمع"], items: [
+    [["Who looks after maintenance?", "من يتولى الصيانة؟"],
+     ["An on-site team handles repairs and requests every day. You report a problem from your phone and see when the technician will arrive.", "فريق مقيم في المجمع يتولى الإصلاحات والطلبات يومياً. تبلّغ عن العطل من جوالك وتعرف موعد وصول الفني."]],
+    [["Are there separate facilities for women?", "هل توجد مرافق خاصة بالنساء؟"],
+     ["Yes. There are separate gyms for men and women, and ladies-only hours at the family pool.", "نعم. توجد صالات رياضية منفصلة للرجال والنساء، وأوقات خاصة بالنساء في المسبح العائلي."]],
+    [["Are pets allowed?", "هل يُسمح بالحيوانات الأليفة؟"],
+     ["Cats and small dogs are welcome once registered with the management office. Pets are kept on a lead in shared areas.", "يُسمح بالقطط والكلاب الصغيرة بعد تسجيلها لدى الإدارة، مع إبقائها مربوطة في المرافق المشتركة."]],
+    [["Can I visit without an appointment?", "هل يمكنني الزيارة دون موعد؟"],
+     ["The show villa is open every day from 9am to 9pm. Booking ahead means a member of the team is free to show you round.", "فيلا العرض مفتوحة يومياً من ٩ صباحاً إلى ٩ مساءً. الحجز المسبق يضمن وجود أحد أعضاء الفريق لمرافقتك."]]
+  ] }
+];
+
+/* Keep the "available" counts in step with the masterplan. */
+VILLAS.forEach((v) => { const s = PLOT_STATUS[v.id] || ""; v.count = s.length || v.count; v.available = (s.match(/A/g) || []).length; });
