@@ -58,22 +58,22 @@ const TYPES = {
 };
 
 const AMENITIES = {
-  pool:     { ar: "مسبح خاص",       en: "Private pool",     i: "🏊" },
-  garden:   { ar: "حديقة",          en: "Garden",           i: "🌿" },
-  elevator: { ar: "مصعد",           en: "Elevator",         i: "🛗" },
-  parking:  { ar: "موقف خاص",       en: "Private parking",  i: "🚗" },
-  ac:       { ar: "تكييف مركزي",    en: "Central A/C",      i: "❄️" },
-  maid:     { ar: "غرفة خادمة",     en: "Maid's room",      i: "🧺" },
-  driver:   { ar: "غرفة سائق",      en: "Driver's room",    i: "🚪" },
-  majlis:   { ar: "مجلس رجال",      en: "Men's majlis",     i: "🛋️" },
-  annex:    { ar: "ملحق",           en: "Annex",            i: "🏠" },
-  smart:    { ar: "نظام منزل ذكي",  en: "Smart home",       i: "📱" },
-  security: { ar: "حراسة ٢٤/٧",     en: "24/7 security",    i: "🛡️" },
-  gym:      { ar: "نادي رياضي",     en: "Gym",              i: "🏋️" },
-  kitchen:  { ar: "مطبخ راكب",      en: "Fitted kitchen",   i: "🍳" },
-  fiber:    { ar: "ألياف بصرية",    en: "Fiber internet",   i: "📶" },
-  solar:    { ar: "طاقة شمسية",     en: "Solar panels",     i: "☀️" },
-  furnished:{ ar: "مؤثث",           en: "Furnished",        i: "🪑" }
+  pool:     { ar: "مسبح خاص",       en: "Private pool",     i: '<i class="ti ti-pool" aria-hidden="true"></i>' },
+  garden:   { ar: "حديقة",          en: "Garden",           i: '<i class="ti ti-plant-2" aria-hidden="true"></i>' },
+  elevator: { ar: "مصعد",           en: "Elevator",         i: '<i class="ti ti-elevator" aria-hidden="true"></i>' },
+  parking:  { ar: "موقف خاص",       en: "Private parking",  i: '<i class="ti ti-car" aria-hidden="true"></i>' },
+  ac:       { ar: "تكييف مركزي",    en: "Central A/C",      i: '<i class="ti ti-snowflake" aria-hidden="true"></i>' },
+  maid:     { ar: "غرفة خادمة",     en: "Maid's room",      i: '<i class="ti ti-hanger" aria-hidden="true"></i>' },
+  driver:   { ar: "غرفة سائق",      en: "Driver's room",    i: '<i class="ti ti-door" aria-hidden="true"></i>' },
+  majlis:   { ar: "مجلس رجال",      en: "Men's majlis",     i: '<i class="ti ti-sofa" aria-hidden="true"></i>' },
+  annex:    { ar: "ملحق",           en: "Annex",            i: '<i class="ti ti-home" aria-hidden="true"></i>' },
+  smart:    { ar: "نظام منزل ذكي",  en: "Smart home",       i: '<i class="ti ti-device-mobile" aria-hidden="true"></i>' },
+  security: { ar: "حراسة ٢٤/٧",     en: "24/7 security",    i: '<i class="ti ti-shield-check" aria-hidden="true"></i>' },
+  gym:      { ar: "نادي رياضي",     en: "Gym",              i: '<i class="ti ti-barbell" aria-hidden="true"></i>' },
+  kitchen:  { ar: "مطبخ راكب",      en: "Fitted kitchen",   i: '<i class="ti ti-tools-kitchen-2" aria-hidden="true"></i>' },
+  fiber:    { ar: "ألياف بصرية",    en: "Fiber internet",   i: '<i class="ti ti-wifi" aria-hidden="true"></i>' },
+  solar:    { ar: "طاقة شمسية",     en: "Solar panels",     i: '<i class="ti ti-sun" aria-hidden="true"></i>' },
+  furnished:{ ar: "مؤثث",           en: "Furnished",        i: '<i class="ti ti-armchair" aria-hidden="true"></i>' }
 };
 
 const FACADES = {

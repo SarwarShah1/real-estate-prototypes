@@ -39,15 +39,15 @@ function priceHTML(l) {
 }
 function specs(l) {
   const a = [];
-  if (l.beds) a.push(`🛏 ${num(l.beds)} ${T("غرف", "beds")}`);
-  if (l.baths) a.push(`🚿 ${num(l.baths)} ${T("حمامات", "baths")}`);
-  a.push(`📐 ${num(fmt(l.area))} ${T("م²", "m²")}`);
+  if (l.beds) a.push(`<i class='ti ti-bed' aria-hidden='true'></i> ${num(l.beds)} ${T("غرف", "beds")}`);
+  if (l.baths) a.push(`<i class='ti ti-bath' aria-hidden='true'></i> ${num(l.baths)} ${T("حمامات", "baths")}`);
+  a.push(`<i class='ti ti-ruler-measure' aria-hidden='true'></i> ${num(fmt(l.area))} ${T("م²", "m²")}`);
   if (l.type === "land") a.push(`↔ ${T("شارع", "street")} ${num(l.street)}${T("م", " m")}`);
   return a.map((x) => `<span>${x}</span>`).join("");
 }
 function card(l) {
   return `<article class="card">
-    <button class="fav ${S.favs.has(l.id) ? "on" : ""}" data-act="fav" data-id="${l.id}" aria-label="${T("حفظ في المفضلة", "Save to favourites")}" aria-pressed="${S.favs.has(l.id)}">${S.favs.has(l.id) ? "♥" : "♡"}</button>
+    <button class="fav ${S.favs.has(l.id) ? "on" : ""}" data-act="fav" data-id="${l.id}" aria-label="${T("حفظ في المفضلة", "Save to favourites")}" aria-pressed="${S.favs.has(l.id)}">${S.favs.has(l.id) ? "<i class='ti ti-heart-filled' aria-hidden='true'></i>" : "<i class='ti ti-heart' aria-hidden='true'></i>"}</button>
     <a class="card-img" href="#p-${l.id}" aria-label="${esc(title(l))}">
       <div class="tags"><span class="tag ${l.purpose}">${l.purpose === "sale" ? T("للبيع", "For sale") : T("للإيجار", "For rent")}</span>${l.isNew ? `<span class="tag new">${T("جديد", "New")}</span>` : ""}</div>
       ${art(l.art, l.tod)}
@@ -55,7 +55,7 @@ function card(l) {
     <div class="card-b">
       <div class="price">${priceHTML(l)}</div>
       <h3><a href="#p-${l.id}">${esc(title(l))}</a></h3>
-      <div class="loc">📍 ${L(dist(l.district))}، ${T("الرياض", "Riyadh")} · ${L(TYPES[l.type])}</div>
+      <div class="loc"><i class='ti ti-map-pin' aria-hidden='true'></i> ${L(dist(l.district))}، ${T("الرياض", "Riyadh")} · ${L(TYPES[l.type])}</div>
       <div class="specs">${specs(l)}</div>
       <div class="card-f">
         <span class="lic">${T("ترخيص الإعلان", "Ad licence")} ${num(l.adLicense)}</span>
@@ -84,10 +84,10 @@ function chrome() {
       <span>${T(BRAND.nameAr, BRAND.nameEn)}<small>${T("وساطة وتسويق عقاري", "Brokerage & marketing")}</small></span></a>
     <nav class="nav" id="nav" aria-label="Main">${NAV.map(([k, a, e]) => `<a href="#${k}" class="${r === k || (k === "listings" && r.startsWith("p-")) ? "on" : ""}">${T(a, e)}</a>`).join("")}</nav>
     <div class="hd-tools">
-      <a class="icon-btn" href="#favorites" aria-label="${T("المفضلة", "Favourites")}">♡${S.favs.size ? `<span class="badge">${S.favs.size}</span>` : ""}</a>
+      <a class="icon-btn" href="#favorites" aria-label="${T("المفضلة", "Favourites")}"><i class='ti ti-heart' aria-hidden='true'></i>${S.favs.size ? `<span class="badge">${S.favs.size}</span>` : ""}</a>
       <button class="lang" data-act="lang" aria-label="Switch language">${T("English", "العربية")}</button>
       <a class="btn btn-g btn-sm" href="#list-property">${T("اعرض عقارك", "List your property")}</a>
-      <button class="icon-btn burger" data-act="burger" aria-label="Menu">☰</button>
+      <button class="icon-btn burger" data-act="burger" aria-label="Menu"><i class='ti ti-menu-2' aria-hidden='true'></i></button>
     </div></div>`;
   $("#footer").innerHTML = `<div class="wrap">
     <div class="ft">
@@ -98,12 +98,12 @@ function chrome() {
       <div><h4>${T("للملاك والمكاتب", "Owners & staff")}</h4><a href="#list-property">${T("اعرض عقارك", "List your property")}</a><a href="#services">${T("إدارة الأملاك", "Property management")}</a><a href="#compare">${T("المقارنة", "Compare")}</a><a href="#dashboard">${T("لوحة المكتب (تجريبي)", "Agency dashboard (demo)")}</a></div>
       <div><h4>${T("تواصل", "Contact")}</h4><a href="tel:+${BRAND.phoneRaw}">${num(BRAND.phone)}</a><a href="mailto:${BRAND.email}">${BRAND.email}</a><p style="margin:6px 0 0">${T(BRAND.addressAr, BRAND.addressEn)}<br>${T(BRAND.hoursAr, BRAND.hoursEn)}</p></div>
     </div>
-    <div class="warn" style="margin-top:26px;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18);color:#e9d9b8">⚠️ ${T("تنبيه: لا نطلب أي عربون أو تحويل عبر روابط أو حسابات شخصية. جميع المدفوعات تتم عبر الحساب الرسمي للمكتب وعقود موثقة.", "Fraud notice: we never ask for deposits through links or personal accounts. All payments go to the office's official account under documented contracts.")}</div>
+    <div class="warn" style="margin-top:26px;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18);color:#e9d9b8"><i class='ti ti-alert-triangle' aria-hidden='true'></i> ${T("تنبيه: لا نطلب أي عربون أو تحويل عبر روابط أو حسابات شخصية. جميع المدفوعات تتم عبر الحساب الرسمي للمكتب وعقود موثقة.", "Fraud notice: we never ask for deposits through links or personal accounts. All payments go to the office's official account under documented contracts.")}</div>
     <div class="copy"><span>© ${num(2026)} ${T(BRAND.nameAr, BRAND.nameEn)} — ${T("نموذج تجريبي", "demo prototype")}</span><span>${T("سياسة الخصوصية · الشروط والأحكام", "Privacy policy · Terms")}</span></div></div>`;
   $("#floaters").innerHTML = `
     <a class="wa-float" href="${wa(T("السلام عليكم، أرغب بالاستفسار عن عقار", "Hello, I'd like to ask about a property"))}" target="_blank" rel="noopener" aria-label="WhatsApp">${WA_ICON}</a>
     ${S.cmp.length && r !== "compare" ? `<div class="cmp-bar"><span>${T("للمقارنة", "To compare")}: ${num(S.cmp.length)}/3</span><span style="display:flex;gap:8px"><button class="btn btn-sm btn-l" data-act="cmp-clear">${T("مسح", "Clear")}</button><a class="btn btn-sm btn-g" href="#compare">${T("قارن الآن", "Compare now")}</a></span></div>` : ""}
-    <div class="mbar"><a class="btn-o btn" href="tel:+${BRAND.phoneRaw}">📞 ${T("اتصال", "Call")}</a><a class="btn btn-w" href="${wa(T("السلام عليكم", "Hello"))}" target="_blank" rel="noopener">${T("واتساب", "WhatsApp")}</a><button class="btn btn-p" data-act="callback">${T("اطلب عقارك", "Request")}</button></div>`;
+    <div class="mbar"><a class="btn-o btn" href="tel:+${BRAND.phoneRaw}"><i class='ti ti-phone' aria-hidden='true'></i> ${T("اتصال", "Call")}</a><a class="btn btn-w" href="${wa(T("السلام عليكم", "Hello"))}" target="_blank" rel="noopener">${T("واتساب", "WhatsApp")}</a><button class="btn btn-p" data-act="callback">${T("اطلب عقارك", "Request")}</button></div>`;
 }
 
 /* ---------- pages ---------- */
@@ -112,7 +112,7 @@ function pageHome() {
   const counts = (id) => LISTINGS.filter((l) => l.district === id).length;
   const top = [...DISTRICTS].sort((a, b) => counts(b.id) - counts(a.id)).slice(0, 8);
   return `
-  <section class="hero"><div class="hero-art">${art("villa", 3)}</div><div class="wrap">
+  <section class="hero"><div class="hero-art">${photo("hero")}</div><div class="wrap">
     <div class="eyebrow">${T("وسيط عقاري مرخّص · الرياض", "Licensed brokerage · Riyadh")}</div>
     <h1>${T("عقارك القادم في الرياض.. بثقة ووضوح", "Find your next Riyadh property with confidence")}</h1>
     <p class="lead">${T("أسعار معلنة، تراخيص إعلان موثقة لكل عقار، ورد خلال دقائق على الواتساب. بيع، إيجار، ومشاريع على الخارطة.", "Published prices, a verified advertising licence on every listing, and replies within minutes on WhatsApp. Sales, rentals and off-plan projects.")}</p>
@@ -124,15 +124,15 @@ function pageHome() {
       ${field(T("الحي", "District"), `<select name="district">${distOpts("")}</select>`)}
       ${field(T("الغرف", "Bedrooms"), `<select name="beds">${opt("", T("أي عدد", "Any"), "")}${[1, 2, 3, 4, 5].map((n) => opt(n, n + "+", "")).join("")}</select>`)}
       ${field(T("أقصى سعر (ر.س)", "Max price (SAR)"), `<input name="max" inputmode="numeric" dir="ltr" placeholder="${S.heroTab === "rent" ? "80,000" : "2,000,000"}">`)}
-      <button class="btn btn-p" type="submit">🔍 ${T("ابحث", "Search")}</button>
+      <button class="btn btn-p" type="submit"><i class='ti ti-search' aria-hidden='true'></i> ${T("ابحث", "Search")}</button>
     </form>
     <div class="chips">${[["villa", "sale", "فلل للبيع", "Villas for sale"], ["apartment", "rent", "شقق للإيجار", "Apartments for rent"], ["land", "sale", "أراضي", "Land"], ["compound", "rent", "كمبوندات", "Compounds"], ["office", "rent", "مكاتب", "Offices"]].map(([t, p, a, e]) => `<button class="chip" data-act="quick" data-type="${t}" data-purpose="${p}">${T(a, e)}</button>`).join("")}</div>
   </div>
   <div class="trust">
-    <div><i>🪪</i><span><b>${T("رخصة فال", "FAL licensed")} ${num(BRAND.fal)}</b><small>${T("الهيئة العامة للعقار", "Real Estate General Authority")}</small></span></div>
-    <div><i>✅</i><span><b>${T("ترخيص إعلان لكل عقار", "Ad licence on every listing")}</b><small>${T("رقم الترخيص ورمز QR ظاهر", "Number and QR shown")}</small></span></div>
-    <div><i>📄</i><span><b>${T("عقود موثقة في إيجار", "Ejar-registered leases")}</b><small>${T("دفعات شهرية أو سنوية", "Monthly or yearly payments")}</small></span></div>
-    <div><i>⚡</i><span><b>${T("رد خلال ١٠ دقائق", "Reply in 10 minutes")}</b><small>${T("واتساب · اتصال · نموذج", "WhatsApp · call · form")}</small></span></div>
+    <div><i><i class='ti ti-id' aria-hidden='true'></i></i><span><b>${T("رخصة فال", "FAL licensed")} ${num(BRAND.fal)}</b><small>${T("الهيئة العامة للعقار", "Real Estate General Authority")}</small></span></div>
+    <div><i><i class='ti ti-circle-check' aria-hidden='true'></i></i><span><b>${T("ترخيص إعلان لكل عقار", "Ad licence on every listing")}</b><small>${T("رقم الترخيص ورمز QR ظاهر", "Number and QR shown")}</small></span></div>
+    <div><i><i class='ti ti-file-text' aria-hidden='true'></i></i><span><b>${T("عقود موثقة في إيجار", "Ejar-registered leases")}</b><small>${T("دفعات شهرية أو سنوية", "Monthly or yearly payments")}</small></span></div>
+    <div><i><i class='ti ti-bolt' aria-hidden='true'></i></i><span><b>${T("رد خلال ١٠ دقائق", "Reply in 10 minutes")}</b><small>${T("واتساب · اتصال · نموذج", "WhatsApp · call · form")}</small></span></div>
   </div></div>
 
   <section class="s"><div class="wrap">
@@ -164,7 +164,7 @@ function pageHome() {
 
   <section class="s"><div class="wrap">
     <div class="s-head"><div><h2>${T("لماذا يختارنا العملاء", "Why clients choose us")}</h2></div><a class="more" href="#services">${T("كل الخدمات", "All services")} ${arrow()}</a></div>
-    <div class="grid c4">${[["💬", "رد فوري", "Instant replies", "كل عقار له زر واتساب برسالة جاهزة فيها رقم الإعلان.", "Every listing has a WhatsApp button with the listing number pre-filled."], ["🧮", "حاسبات واضحة", "Clear calculators", "تمويل، رسوم، وعائد استثماري قبل ما تتصل.", "Mortgage, fees and ROI before you even call."], ["🗺️", "بحث بالخريطة", "Map search", "شوف الأسعار حسب الحي وقارن بين ٣ عقارات.", "See prices by district and compare up to 3 properties."], ["🌍", "عربي / English", "Arabic / English", "واجهة كاملة باللغتين للمقيمين والمستثمرين الأجانب.", "Full bilingual site for residents and foreign investors."]].map(([i, a, e, da, de]) => `<div class="feat"><div class="ic">${i}</div><h3>${T(a, e)}</h3><p>${T(da, de)}</p></div>`).join("")}</div></div></section>
+    <div class="grid c4">${[["<i class='ti ti-message-circle' aria-hidden='true'></i>", "رد فوري", "Instant replies", "كل عقار له زر واتساب برسالة جاهزة فيها رقم الإعلان.", "Every listing has a WhatsApp button with the listing number pre-filled."], ["<i class='ti ti-calculator' aria-hidden='true'></i>", "حاسبات واضحة", "Clear calculators", "تمويل، رسوم، وعائد استثماري قبل ما تتصل.", "Mortgage, fees and ROI before you even call."], ["<i class='ti ti-map-2' aria-hidden='true'></i>", "بحث بالخريطة", "Map search", "شوف الأسعار حسب الحي وقارن بين ٣ عقارات.", "See prices by district and compare up to 3 properties."], ["<i class='ti ti-world' aria-hidden='true'></i>", "عربي / English", "Arabic / English", "واجهة كاملة باللغتين للمقيمين والمستثمرين الأجانب.", "Full bilingual site for residents and foreign investors."]].map(([i, a, e, da, de]) => `<div class="feat"><div class="ic">${i}</div><h3>${T(a, e)}</h3><p>${T(da, de)}</p></div>`).join("")}</div></div></section>
 
   <section class="s alt"><div class="wrap">
     <div class="s-head"><div><h2>${T("قالوا عنا", "What clients say")}</h2><p>${T("آراء توضيحية — تُستبدل بتقييمات المكتب الحقيقية من خرائط قوقل", "Sample placeholders — replaced with the agency's real Google reviews")}</p></div></div>
@@ -185,7 +185,7 @@ function faq() {
 
 function projectCard(p) {
   return `<div class="proj"><div class="pi">${art(p.art, 2)}<div class="tags"><span class="tag sale">${T("بيع على الخارطة", "Off-plan")}</span><span class="tag">${T("التسليم", "Handover")} ${num(p.handover)}</span></div></div>
-    <div class="pb"><h3 style="font-size:1.5rem">${L(p)}</h3><div class="loc">📍 ${L(dist(p.district))}، ${T("الرياض", "Riyadh")}</div>
+    <div class="pb"><h3 style="font-size:1.5rem">${L(p)}</h3><div class="loc"><i class='ti ti-map-pin' aria-hidden='true'></i> ${L(dist(p.district))}، ${T("الرياض", "Riyadh")}</div>
       <p style="margin-top:10px">${T(p.descAr, p.descEn)}</p>
       <div class="kv"><div><small>${T("يبدأ من", "From")}</small><b>${money(p.from)}</b></div><div><small>${T("الوحدات", "Units")}</small><b>${num(p.units)}</b></div><div><small>${T("المتاح", "Available")}</small><b>${num(p.units - p.sold)}</b></div></div>
       <small class="note">${T("نسبة الإنجاز", "Construction progress")} ${num(p.progress + "%")}</small><div class="bar"><i style="width:${p.progress}%"></i></div>
@@ -211,10 +211,10 @@ function resultsHTML() {
   const r = filtered();
   return `<div class="toolbar"><b>${num(r.length)} ${T("عقار مطابق", "matching properties")}</b>
     <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-      <button class="btn btn-sm btn-l filter-toggle" data-act="filters">⚙ ${T("الفلاتر", "Filters")}</button>
+      <button class="btn btn-sm btn-l filter-toggle" data-act="filters"><i class='ti ti-adjustments-horizontal' aria-hidden='true'></i> ${T("الفلاتر", "Filters")}</button>
       ${S.f.purpose !== "sale" ? `<div class="seg" style="min-width:170px"><button class="${!S.rentMonthly ? "on" : ""}" data-act="rentmode" data-v="0">${T("سنوي", "Yearly")}</button><button class="${S.rentMonthly ? "on" : ""}" data-act="rentmode" data-v="1">${T("شهري", "Monthly")}</button></div>` : ""}
       <select data-f="sort" aria-label="${T("الترتيب", "Sort")}" style="padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:#fff">${opt("new", T("الأحدث", "Newest"), S.f.sort)}${opt("low", T("السعر: الأقل", "Price: low to high"), S.f.sort)}${opt("high", T("السعر: الأعلى", "Price: high to low"), S.f.sort)}${opt("area", T("المساحة", "Largest area"), S.f.sort)}</select>
-      <a class="btn btn-sm btn-o" href="#map">🗺 ${T("الخريطة", "Map")}</a></div></div>
+      <a class="btn btn-sm btn-o" href="#map"><i class='ti ti-map-2' aria-hidden='true'></i> ${T("الخريطة", "Map")}</a></div></div>
     ${r.length ? `<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(270px,1fr))">${r.map(card).join("")}</div>` : `<div class="empty"><h3>${T("لا توجد نتائج مطابقة", "No matching properties")}</h3><p>${T("جرّب توسيع البحث، أو اترك طلبك ونبحث لك.", "Try widening the search, or leave a request and we'll search for you.")}</p><button class="btn btn-p" data-act="callback">${T("اترك طلبك", "Leave a request")}</button> <button class="btn btn-o" data-act="reset">${T("مسح الفلاتر", "Clear filters")}</button></div>`}`;
 }
 function pageListings() {
@@ -312,15 +312,15 @@ function pageDetail(id) {
     <div class="crumb" style="color:var(--mute);margin-top:22px"><a href="#home">${T("الرئيسية", "Home")}</a> / <a href="#listings">${T("العقارات", "Properties")}</a> / ${num(l.id)}</div>
     <div class="s-head" style="margin:8px 0 0;align-items:start"><div>
       <div style="display:flex;gap:6px;margin-bottom:8px"><span class="tag ${l.purpose}">${l.purpose === "sale" ? T("للبيع", "For sale") : T("للإيجار", "For rent")}</span>${l.isNew ? `<span class="tag new" style="border:1px solid var(--line)">${T("جديد", "New")}</span>` : ""}<span class="tag" style="border:1px solid var(--line)">${T("رقم الإعلان", "Ref")} ${num(l.id)}</span></div>
-      <h1 style="font-size:clamp(1.5rem,3vw,2.2rem)">${esc(title(l))}</h1><div class="loc">📍 ${L(d)}، ${T("الرياض", "Riyadh")}</div></div>
+      <h1 style="font-size:clamp(1.5rem,3vw,2.2rem)">${esc(title(l))}</h1><div class="loc"><i class='ti ti-map-pin' aria-hidden='true'></i> ${L(d)}، ${T("الرياض", "Riyadh")}</div></div>
       <div style="text-align:end"><div class="price" style="font-size:2rem">${priceHTML(l)}</div>${l.purpose === "sale" ? `<small class="note">${money(ppm)} / ${T("م²", "m²")}</small>` : `<small class="note">${T("≈", "≈")} ${money(l.price / 12)} ${T("شهرياً", "per month")}</small>`}
-        <div style="display:flex;gap:8px;margin-top:8px;justify-content:flex-end"><button class="btn btn-sm btn-l" data-act="fav" data-id="${l.id}">${S.favs.has(l.id) ? "♥ " + T("محفوظ", "Saved") : "♡ " + T("حفظ", "Save")}</button><button class="btn btn-sm btn-l" data-act="copy">🔗 ${T("نسخ الرابط", "Copy link")}</button><a class="btn btn-sm btn-l" target="_blank" rel="noopener" href="${wa(T(`شاهد هذا العقار: ${l.titleAr} — رقم ${l.id}`, `Have a look at this property: ${l.titleEn} — ref ${l.id}`), "")}">${T("مشاركة", "Share")}</a></div></div></div>
-    <div class="gallery"><div>${art(l.art, l.tod)}<span class="cap">${T("صور توضيحية — تُستبدل بصور العقار و جولة ٣٦٠°", "Illustrations — replaced by real photos and a 360° tour")}</span></div><div>${art(l.art, l.tod, 1)}</div><div>${art(l.art, l.tod, 2)}<span class="cap">${T("المخطط", "Floor plan")}</span></div></div>
+        <div style="display:flex;gap:8px;margin-top:8px;justify-content:flex-end"><button class="btn btn-sm btn-l" data-act="fav" data-id="${l.id}">${S.favs.has(l.id) ? "<i class='ti ti-heart-filled' aria-hidden='true'></i> " + T("محفوظ", "Saved") : "<i class='ti ti-heart' aria-hidden='true'></i> " + T("حفظ", "Save")}</button><button class="btn btn-sm btn-l" data-act="copy"><i class='ti ti-link' aria-hidden='true'></i> ${T("نسخ الرابط", "Copy link")}</button><a class="btn btn-sm btn-l" target="_blank" rel="noopener" href="${wa(T(`شاهد هذا العقار: ${l.titleAr} — رقم ${l.id}`, `Have a look at this property: ${l.titleEn} — ref ${l.id}`), "")}">${T("مشاركة", "Share")}</a></div></div></div>
+    <div class="gallery"><div>${art(l.art, l.tod)}<span class="cap">${T("صور تجريبية — تُستبدل بصور العقار وجولة ٣٦٠°", "Sample photos — replaced by the property's own photos and a 360° tour")}</span></div><div>${art(l.art, l.tod, 1)}</div><div>${art(l.art, l.tod, 2)}<span class="cap">${T("المخطط", "Floor plan")}</span></div></div>
     <div class="detail"><div>
       <div class="facts">${fact(T("النوع", "Type"), L(TYPES[l.type]))}${fact(T("المساحة", "Area"), num(fmt(l.area)) + " " + T("م²", "m²"))}${l.beds ? fact(T("غرف النوم", "Bedrooms"), num(l.beds)) : ""}${l.baths ? fact(T("دورات المياه", "Bathrooms"), num(l.baths)) : ""}${fact(T("الواجهة", "Facade"), L(FACADES[l.facade]))}${fact(T("عرض الشارع", "Street width"), num(l.street) + T(" م", " m"))}${l.age != null ? fact(T("عمر العقار", "Building age"), l.age ? num(l.age) + " " + T("سنة", "yrs") : T("جديد", "New")) : ""}${l.floor != null ? fact(T("الدور", "Floor"), l.floor ? num(l.floor) : T("أرضي", "Ground")) : ""}${l.tenant ? fact(T("فئة المستأجر", "Tenant type"), L(TENANTS[l.tenant])) : ""}</div>
       <div class="box"><h3>${T("الوصف", "Description")}</h3><p style="margin:0">${T(l.descAr, l.descEn)}</p></div>
       ${l.amen.length ? `<div class="box"><h3>${T("المزايا", "Features & amenities")}</h3><div class="amen">${l.amen.map((a) => `<span>${AMENITIES[a].i} ${L(AMENITIES[a])}</span>`).join("")}</div></div>` : ""}
-      <div class="box rega"><div><h3>🛡 ${T("بيانات الترخيص النظامية", "Regulatory licence details")}</h3>
+      <div class="box rega"><div><h3><i class='ti ti-shield-check' aria-hidden='true'></i> ${T("بيانات الترخيص النظامية", "Regulatory licence details")}</h3>
         <dl><dt>${T("رقم ترخيص الإعلان", "Advertising licence no.")}</dt><dd>${num(l.adLicense)}</dd><dt>${T("تاريخ انتهاء الترخيص", "Licence expiry")}</dt><dd>${num(l.adExpiry)}</dd><dt>${T("رخصة فال للمكتب", "Office FAL licence")}</dt><dd>${num(BRAND.fal)}</dd><dt>${T("المعلن", "Advertiser")}</dt><dd>${T(BRAND.nameAr, BRAND.nameEn)} — ${T("وسيط مفوّض", "authorised broker")}</dd><dt>${T("تاريخ النشر", "Posted")}</dt><dd>${num(l.posted)}</dd></dl>
         <p class="note" style="margin:10px 0 0">${T("أرقام تجريبية. في الموقع الفعلي تظهر بيانات ترخيص الهيئة العامة للعقار ورمز QR الرسمي للتحقق.", "Sample numbers. On the live site this shows the real REGA licence data and the official verification QR code.")}</p></div>${fakeQR(l.id)}</div>
       <div class="box"><h3>${T("الموقع", "Location")}</h3><div class="map" style="aspect-ratio:1000/520">${mapSVG([l], l.id)}</div></div>
@@ -330,7 +330,7 @@ function pageDetail(id) {
     </div>
     <aside class="side">
       <div class="box" style="margin:0"><div class="agent"><div class="avatar" style="background:${ag.color}">${L(ag).charAt(0)}</div><div><b>${L(ag)}</b><div class="note">${T(ag.roleAr, ag.roleEn)}</div><div class="note">${num(ag.langs)}</div></div></div>
-        <div class="stack"><a class="btn btn-w btn-block" target="_blank" rel="noopener" href="${wa(msg, ag.wa)}">${T("واتساب – استفسر عن العقار", "WhatsApp about this property")}</a><a class="btn btn-o btn-block" href="tel:+${BRAND.phoneRaw}">📞 ${num(BRAND.phone)}</a></div></div>
+        <div class="stack"><a class="btn btn-w btn-block" target="_blank" rel="noopener" href="${wa(msg, ag.wa)}">${T("واتساب – استفسر عن العقار", "WhatsApp about this property")}</a><a class="btn btn-o btn-block" href="tel:+${BRAND.phoneRaw}"><i class='ti ti-phone' aria-hidden='true'></i> ${num(BRAND.phone)}</a></div></div>
       <form class="box stack" data-form="viewing" data-ref="${l.id}" style="margin:0"><h3 style="margin:0">${T("احجز موعد معاينة", "Book a viewing")}</h3>
         <div class="two">${field(T("التاريخ", "Date"), `<input type="date" name="date" required>`)}${field(T("الوقت", "Time"), `<select name="time">${["10:00", "12:00", "16:30", "18:00", "20:00"].map((t) => opt(t, t, "16:30")).join("")}</select>`)}</div>
         ${leadFields()}<button class="btn btn-p btn-block">${T("تأكيد الحجز", "Confirm booking")}</button></form>
@@ -340,7 +340,7 @@ function pageDetail(id) {
 function pageProjects() { return head(T("مشاريعنا", "Our projects"), T("مشاريع البيع على الخارطة والمشاريع الجاهزة التي نسوّقها", "Off-plan and ready projects we market")) + `<div class="wrap" style="padding:30px 20px 60px">${PROJECTS.map(projectCard).join("")}</div>`; }
 
 function pageServices() {
-  const sv = [["🤝", "الوساطة في البيع والشراء", "Sales brokerage", "تسعير واقعي، تسويق احترافي، وتفاوض حتى الإفراغ.", "Realistic pricing, professional marketing and negotiation through to title transfer."], ["🔑", "التأجير", "Leasing", "فرز المستأجرين، توثيق العقود في إيجار وتحصيل الدفعات.", "Tenant screening, Ejar contracts and payment collection."], ["🏢", "إدارة الأملاك", "Property management", "صيانة، تحصيل، وتقارير شهرية للمالك.", "Maintenance, collection and monthly owner reports."], ["📊", "التقييم والاستشارات", "Valuation & advisory", "تقدير القيمة السوقية ودراسات جدوى للمستثمرين.", "Market valuations and feasibility studies for investors."], ["📣", "تسويق المشاريع", "Project marketing", "صفحات مشاريع، حملات إعلانية وإدارة مبيعات للمطورين.", "Project pages, ad campaigns and sales management for developers."], ["✈️", "خدمات الانتقال", "Relocation", "مساعدة الشركات والمقيمين الجدد في السكن والمدارس.", "Housing and school support for companies and new residents."]];
+  const sv = [["<i class='ti ti-heart-handshake' aria-hidden='true'></i>", "الوساطة في البيع والشراء", "Sales brokerage", "تسعير واقعي، تسويق احترافي، وتفاوض حتى الإفراغ.", "Realistic pricing, professional marketing and negotiation through to title transfer."], ["<i class='ti ti-key' aria-hidden='true'></i>", "التأجير", "Leasing", "فرز المستأجرين، توثيق العقود في إيجار وتحصيل الدفعات.", "Tenant screening, Ejar contracts and payment collection."], ["<i class='ti ti-building-skyscraper' aria-hidden='true'></i>", "إدارة الأملاك", "Property management", "صيانة، تحصيل، وتقارير شهرية للمالك.", "Maintenance, collection and monthly owner reports."], ["<i class='ti ti-chart-bar' aria-hidden='true'></i>", "التقييم والاستشارات", "Valuation & advisory", "تقدير القيمة السوقية ودراسات جدوى للمستثمرين.", "Market valuations and feasibility studies for investors."], ["<i class='ti ti-speakerphone' aria-hidden='true'></i>", "تسويق المشاريع", "Project marketing", "صفحات مشاريع، حملات إعلانية وإدارة مبيعات للمطورين.", "Project pages, ad campaigns and sales management for developers."], ["<i class='ti ti-plane' aria-hidden='true'></i>", "خدمات الانتقال", "Relocation", "مساعدة الشركات والمقيمين الجدد في السكن والمدارس.", "Housing and school support for companies and new residents."]];
   return head(T("خدماتنا", "Our services")) + `<section class="s"><div class="wrap"><div class="grid">${sv.map(([i, a, e, da, de]) => `<div class="feat"><div class="ic">${i}</div><h3>${T(a, e)}</h3><p>${T(da, de)}</p><button class="btn btn-sm btn-o" style="margin-top:14px" data-act="callback" data-ref="${e}">${T("اطلب الخدمة", "Request service")}</button></div>`).join("")}</div>
     <div class="s-head" style="margin-top:56px"><h2>${T("كيف نعمل", "How it works")}</h2></div>
     <div class="grid c4">${[["١", "1", "أخبرنا بطلبك", "Tell us your brief"], ["٢", "2", "نرشح لك الخيارات", "We shortlist options"], ["٣", "3", "معاينة وتفاوض", "View and negotiate"], ["٤", "4", "عقد موثق واستلام", "Documented contract & handover"]].map(([na, ne, a, e]) => `<div class="feat"><div class="ic" style="font-family:var(--display);font-weight:700;color:var(--teal)">${T(na, ne)}</div><h3>${T(a, e)}</h3></div>`).join("")}</div></div></section>`;
@@ -348,9 +348,9 @@ function pageServices() {
 
 function pageTools() {
   return head(T("الحاسبات العقارية", "Property calculators"), T("اعرف التكلفة والعائد قبل أن تقرر", "Know the cost and the return before you decide")) + `<div class="wrap" style="padding:30px 20px 60px"><div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr));align-items:start">
-    <div class="box"><h3>🏦 ${T("حاسبة التمويل", "Mortgage calculator")}</h3>${mortBox(1500000)}</div>
-    <div class="box"><h3>🧾 ${T("حاسبة الرسوم والسعي", "Fees & commission calculator")}</h3>${feesBox()}</div>
-    <div class="box"><h3>📈 ${T("حاسبة العائد الاستثماري", "ROI calculator")}</h3>${roiBox()}</div></div></div>`;
+    <div class="box"><h3><i class='ti ti-building-bank' aria-hidden='true'></i> ${T("حاسبة التمويل", "Mortgage calculator")}</h3>${mortBox(1500000)}</div>
+    <div class="box"><h3><i class='ti ti-receipt' aria-hidden='true'></i> ${T("حاسبة الرسوم والسعي", "Fees & commission calculator")}</h3>${feesBox()}</div>
+    <div class="box"><h3><i class='ti ti-trending-up' aria-hidden='true'></i> ${T("حاسبة العائد الاستثماري", "ROI calculator")}</h3>${roiBox()}</div></div></div>`;
 }
 
 function pageOwner() {
@@ -362,12 +362,12 @@ function pageOwner() {
       ${field(T("صور العقار (اختياري)", "Photos (optional)"), `<input type="file" name="photos" accept="image/*" multiple>`)}
       <div class="two">${leadFields()}</div>${field(T("ملاحظات", "Notes"), `<textarea name="note"></textarea>`)}
       <button class="btn btn-g btn-block">${T("اطلب تقييماً مجانياً", "Request a free valuation")}</button></form>
-    <div class="stack">${[["📸", "تصوير احترافي", "Professional photography", "صور، فيديو وجولة ٣٦٠°", "Photos, video and a 360° tour"], ["🪪", "إجراءات نظامية", "Compliance handled", "عقد وساطة وترخيص إعلان باسمك", "Brokerage contract and ad licence handled for you"], ["📢", "وصول أوسع", "Wider reach", "موقعنا + المنصات العقارية + حملات مدفوعة", "Our site + property portals + paid campaigns"], ["📈", "تقرير أسبوعي", "Weekly report", "عدد المشاهدات والاستفسارات والمعاينات", "Views, enquiries and viewings"]].map(([i, a, e, da, de]) => `<div class="feat" style="display:flex;gap:14px"><div class="ic" style="margin:0;flex:none">${i}</div><div><h3 style="margin:0">${T(a, e)}</h3><p>${T(da, de)}</p></div></div>`).join("")}</div></div></div>`;
+    <div class="stack">${[["<i class='ti ti-camera' aria-hidden='true'></i>", "تصوير احترافي", "Professional photography", "صور، فيديو وجولة ٣٦٠°", "Photos, video and a 360° tour"], ["<i class='ti ti-id' aria-hidden='true'></i>", "إجراءات نظامية", "Compliance handled", "عقد وساطة وترخيص إعلان باسمك", "Brokerage contract and ad licence handled for you"], ["<i class='ti ti-speakerphone' aria-hidden='true'></i>", "وصول أوسع", "Wider reach", "موقعنا + المنصات العقارية + حملات مدفوعة", "Our site + property portals + paid campaigns"], ["<i class='ti ti-trending-up' aria-hidden='true'></i>", "تقرير أسبوعي", "Weekly report", "عدد المشاهدات والاستفسارات والمعاينات", "Views, enquiries and viewings"]].map(([i, a, e, da, de]) => `<div class="feat" style="display:flex;gap:14px"><div class="ic" style="margin:0;flex:none">${i}</div><div><h3 style="margin:0">${T(a, e)}</h3><p>${T(da, de)}</p></div></div>`).join("")}</div></div></div>`;
 }
 
 function pageFavs() {
   const r = LISTINGS.filter((l) => S.favs.has(l.id));
-  return head(T("المفضلة", "Favourites")) + `<div class="wrap" style="padding:30px 20px 60px">${r.length ? `<div class="grid">${r.map(card).join("")}</div><div style="margin-top:22px"><a class="btn btn-w" target="_blank" rel="noopener" href="${wa(T("أرغب بمعاينة العقارات: ", "I'd like to view these listings: ") + r.map((l) => l.id).join(", "))}">${T("أرسل القائمة للمستشار على الواتساب", "Send this shortlist to an advisor on WhatsApp")}</a></div>` : `<div class="empty"><h3>${T("لم تحفظ أي عقار بعد", "No saved properties yet")}</h3><p>${T("اضغط ♡ على أي عقار لحفظه هنا.", "Tap ♡ on any property to save it here.")}</p><a class="btn btn-p" href="#listings">${T("تصفح العقارات", "Browse properties")}</a></div>`}</div>`;
+  return head(T("المفضلة", "Favourites")) + `<div class="wrap" style="padding:30px 20px 60px">${r.length ? `<div class="grid">${r.map(card).join("")}</div><div style="margin-top:22px"><a class="btn btn-w" target="_blank" rel="noopener" href="${wa(T("أرغب بمعاينة العقارات: ", "I'd like to view these listings: ") + r.map((l) => l.id).join(", "))}">${T("أرسل القائمة للمستشار على الواتساب", "Send this shortlist to an advisor on WhatsApp")}</a></div>` : `<div class="empty"><h3>${T("لم تحفظ أي عقار بعد", "No saved properties yet")}</h3><p>${T("اضغط <i class='ti ti-heart' aria-hidden='true'></i> على أي عقار لحفظه هنا.", "Tap <i class='ti ti-heart' aria-hidden='true'></i> on any property to save it here.")}</p><a class="btn btn-p" href="#listings">${T("تصفح العقارات", "Browse properties")}</a></div>`}</div>`;
 }
 
 function pageCompare() {
@@ -394,7 +394,7 @@ function pageContact() {
       ${field(T("الموضوع", "Topic"), `<select name="topic">${["شراء|Buying", "استئجار|Renting", "عرض عقار|Listing a property", "إدارة أملاك|Property management", "أخرى|Other"].map((x) => { const [a, e] = x.split("|"); return opt(e, T(a, e), ""); }).join("")}</select>`)}
       ${field(T("رسالتك", "Your message"), `<textarea name="note"></textarea>`)}<button class="btn btn-p btn-block">${T("إرسال", "Send")}</button></form>
     <div class="stack"><div class="box" style="margin:0"><h3>${T("بيانات المكتب", "Office details")}</h3><ul class="clean">
-      <li>📞 <a href="tel:+${BRAND.phoneRaw}">${num(BRAND.phone)}</a></li><li>✉️ <a href="mailto:${BRAND.email}">${BRAND.email}</a></li><li>📍 ${T(BRAND.addressAr, BRAND.addressEn)}</li><li>🕘 ${T(BRAND.hoursAr, BRAND.hoursEn)}</li></ul>
+      <li><i class='ti ti-phone' aria-hidden='true'></i> <a href="tel:+${BRAND.phoneRaw}">${num(BRAND.phone)}</a></li><li><i class='ti ti-mail' aria-hidden='true'></i> <a href="mailto:${BRAND.email}">${BRAND.email}</a></li><li><i class='ti ti-map-pin' aria-hidden='true'></i> ${T(BRAND.addressAr, BRAND.addressEn)}</li><li><i class='ti ti-clock' aria-hidden='true'></i> ${T(BRAND.hoursAr, BRAND.hoursEn)}</li></ul>
       <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap"><a class="btn btn-w" target="_blank" rel="noopener" href="${wa(T("السلام عليكم", "Hello"))}">${T("واتساب", "WhatsApp")}</a>${["X", "Instagram", "Snapchat", "TikTok"].map((s) => `<a class="btn btn-l btn-sm" href="#contact">${s}</a>`).join("")}</div></div>
       <div class="map" style="aspect-ratio:1000/560">${mapSVG([], null).replace("</svg>", `<g transform="translate(450 450)"><circle r="20" fill="#b8894a"/><circle r="7" fill="#fff"/></g><text x="450" y="420" text-anchor="middle" font-size="22" fill="#0d3b3a" font-weight="600">${T("مكتبنا", "Our office")}</text></svg>`)}</div></div></div></div>`;
 }
@@ -431,7 +431,7 @@ function render() {
 }
 function refreshResults() { const el = $("#results"); if (el) el.innerHTML = resultsHTML(); else render(); }
 
-function modal(html) { $("#modal-root").innerHTML = `<div class="modal" data-act="close-bg"><div role="dialog" aria-modal="true"><button class="x" data-act="close" aria-label="Close">✕</button>${html}</div></div>`; const f = $("#modal-root input,#modal-root a.btn"); if (f) f.focus(); }
+function modal(html) { $("#modal-root").innerHTML = `<div class="modal" data-act="close-bg"><div role="dialog" aria-modal="true"><button class="x" data-act="close" aria-label="Close"><i class='ti ti-x' aria-hidden='true'></i></button>${html}</div></div>`; const f = $("#modal-root input,#modal-root a.btn"); if (f) f.focus(); }
 function closeModal() { $("#modal-root").innerHTML = ""; }
 function callbackModal(ref) {
   modal(`<form class="stack" data-form="callback" data-ref="${esc(ref || "")}"><h3>${T("اطلب اتصالاً من مستشار", "Request a call from an advisor")}</h3>${ref ? `<p class="note">${T("بخصوص", "Regarding")}: ${esc(ref)}</p>` : ""}${leadFields(field(T("ماذا تبحث عنه؟", "What are you looking for?"), `<textarea name="note"></textarea>`))}<button class="btn btn-p btn-block">${T("أرسل", "Send")}</button></form>`);
@@ -443,7 +443,7 @@ function addLead(kind, fd, ref) {
   const lead = { kind, name: String(fd.get("name") || ""), phone, ref: ref || "", note: extra, t: new Date().toISOString().slice(0, 16).replace("T", " ") };
   S.leads.push(lead); save();
   const msg = T(`طلب جديد من الموقع (${kind})\nالاسم: ${lead.name}\nالجوال: ${phone}\n${ref ? "المرجع: " + ref + "\n" : ""}${extra}`, `New website enquiry (${kind})\nName: ${lead.name}\nMobile: ${phone}\n${ref ? "Ref: " + ref + "\n" : ""}${extra}`);
-  modal(`<div class="ok"><div class="tick">✓</div><h3>${T("تم استلام طلبك", "Request received")}</h3><p>${T("سيتواصل معك أحد مستشارينا خلال دقائق.", "One of our advisors will contact you within minutes.")}</p>
+  modal(`<div class="ok"><div class="tick"><i class='ti ti-check' aria-hidden='true'></i></div><h3>${T("تم استلام طلبك", "Request received")}</h3><p>${T("سيتواصل معك أحد مستشارينا خلال دقائق.", "One of our advisors will contact you within minutes.")}</p>
     <p class="note">${T("عرض تجريبي: لم يُرسل شيء فعلياً. في الموقع الحقيقي يصل الطلب لواتساب وبريد المكتب ولوحة التحكم.", "Demo: nothing was actually sent. On the live site this goes to the agency's WhatsApp, email and dashboard.")}</p>
     <div class="stack"><a class="btn btn-w" target="_blank" rel="noopener" href="${wa(msg)}">${T("أكمل عبر الواتساب", "Continue on WhatsApp")}</a><a class="btn btn-o" href="#dashboard" data-act="close">${T("شاهد الطلب في لوحة المكتب", "See it in the agency dashboard")}</a></div></div>`);
   return true;

@@ -112,3 +112,23 @@ form.f .full{grid-column:1/-1}
 @media(max-width:700px){body{font-size:16px}.brand{font-size:22px}.gal{grid-template-columns:1fr}.gal .big{min-height:300px}.gal .sm{grid-template-columns:1fr 1fr}.gal .sm .ph{min-height:140px}.split .ph{min-height:320px}.stats>div{border-inline-end:0;border-bottom:1px solid var(--line);padding-block:24px}.hero-in{padding-bottom:56px}
 #mbar{display:grid;grid-template-columns:1fr 1fr 1.3fr;position:fixed;bottom:0;inset-inline:0;z-index:40;background:var(--bg);border-top:1px solid var(--line)}#mbar a{padding:16px 6px;text-align:center;font-size:12px;letter-spacing:.12em;text-transform:uppercase;border-inline-end:1px solid var(--line)}#mbar a:last-child{background:var(--brass);color:var(--ink);border:0;font-weight:500}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ---------- light theme (matches daylight photography) ---------- */
+:root{--bg:#FFFFFF;--bg2:#F6F3EC;--panel:#ECE7DD;--line:#E3DDD1;--line2:#B8B0A1;--ivory:#1B2420;--soft:#454F49;--mute:#69706A;--brass:#1D4E5F;--paper:#F2EDE2;--ink:#FFFFFF}
+body{font-weight:400}
+#header{background:rgba(255,255,255,.95)}
+.menu-btn span,.menu-btn span::before{background:#1B2420}
+.hero::after{background:linear-gradient(180deg,rgba(12,22,18,.18) 0%,rgba(12,22,18,.28) 45%,rgba(12,22,18,.72) 100%)}
+.hero-in{color:#fff}.hero .eyebrow{color:#fff}.hero .soft{color:#F1F4F2}
+.hero .btn-line{border-color:#fff;color:#fff}.hero .btn-line:hover{background:#fff;color:#1B2420}
+.btn-brass:hover{background:#163D4B;color:#fff}.btn-ivory:hover{background:#000;color:#fff}
+.btn-ghost:hover{color:#fff}
+.paper{color:var(--ivory)}.paper .eyebrow{color:var(--brass)}.paper .soft{color:var(--soft)}.paper .link{color:var(--brass);border-color:var(--brass)}.paper .list2>div{border-color:#D8D0C0}
+.ph{background:var(--panel);border-color:var(--line)}.ph.light{background:#E2DBCC}
+form.f input,form.f select{color-scheme:light}form.f select option{background:#fff}
+.err{color:#A3321F}
+.aside{background:var(--bg2)}
+.map iframe{filter:none}
+#footer{background:#16242B;color:#B9C2BC;border:0}#footer .brand,#footer h4{color:#fff!important}#footer a:hover{color:#fff}.ft-b{border-color:#2F4048}
+#lightbox{color:#fff}#lightbox button{border-color:#8A948E}
+#mbar{background:#fff}

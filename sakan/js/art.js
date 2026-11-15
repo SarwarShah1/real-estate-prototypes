@@ -111,7 +111,7 @@ function building(kind, wall, glass, accent) {
   return s;
 }
 
-function art(kind, tod = 1, variant = 0) {
+function artSVG(kind, tod = 1, variant = 0) {
   const id = "g" + (++_artId), [s1, s2, sun] = SKIES[tod % 4];
   const dusk = tod % 4 === 3, glass = dusk ? "#ffd98a" : "#2f6f78";
   const wall = WALLS[(variant + tod) % 4], accent = "#b8894a";
@@ -172,4 +172,38 @@ function fakeQR(seed) {
     if (on) o += `<rect x="${c}" y="${r}" width="1" height="1"/>`;
   }
   return `<svg viewBox="-1 -1 23 23" class="qr" aria-hidden="true"><rect x="-1" y="-1" width="23" height="23" fill="#fff"/><g fill="#0d3b3a">${o}</g></svg>`;
+}
+
+/* =========================================================
+   Photos. Sample images from Unsplash; an agency replaces
+   them with its own listing photos. The floor plan stays a
+   drawing. If a photo fails to load, the frame stays blank.
+   ========================================================= */
+const U = (id, w = 1200) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=72`;
+const PHOTO_SETS = {
+  villa: ["1685514823717-7e1ff6ee0563", "1622015663319-e97e697503ee", "1670589953882-b94c9cb380f5", "1745761320791-5ae142edee8c"],
+  apartment: ["1595330449916-e7c3e1962bd3", "1624204386084-dd8c05e32226", "1460317442991-0ec209397118", "1686385798052-0e86d41b4a60"],
+  floor: ["1686385798052-0e86d41b4a60"],
+  duplex: ["1678575326996-a1bf09b86158"],
+  townhouse: ["1790214120388-944c0187239c", "1627141234469-24711efb373c"],
+  land: ["1775239925233-979d7aac7166", "1659586555029-d80feb54c015"],
+  building: ["1460317442991-0ec209397118"],
+  office: ["1778846266217-6a7783e6eabd", "1784637729389-f24e1d2a8b22"],
+  shop: ["1580554430120-94cfcb3adf25"],
+  compound: ["1610641818989-c2051b5e2cfd", "1674222709212-a6a7e378ac40"]
+};
+const INTERIOR_SETS = {
+  home: ["1758448755778-90ebf4d0f1e7", "1757924461488-ef9ad0670978", "1768144092684-c1a5dd6c7aad", "1704040686413-2c607dbd2f06"],
+  office: ["1497366811353-6870744d04b2", "1497366754035-f200968a6e72"],
+  shop: ["1771033834141-023d630b3965"],
+  building: ["1758448500688-3ababa93fd67"],
+  land: ["1593366426174-1ae8d787bd86"]
+};
+const NAMED = { hero: ["1784637729389-f24e1d2a8b22", 2000] };
+const img = (id, w) => `<img class="photo" src="${U(id, w)}" alt="" loading="lazy" onerror="this.remove()">`;
+function photo(name) { const [id, w] = NAMED[name]; return img(id, w); }
+function art(kind, tod = 1, variant = 0) {
+  if (variant === 2) return artSVG(kind, tod, 2);
+  const set = variant === 1 ? (INTERIOR_SETS[kind] || INTERIOR_SETS.home) : (PHOTO_SETS[kind] || PHOTO_SETS.villa);
+  return img(set[tod % set.length]);
 }

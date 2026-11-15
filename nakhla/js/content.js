@@ -8,23 +8,23 @@
    Empty string = a labelled placeholder box is shown.
    Example: hero: "https://images.unsplash.com/photo-XXXX?w=2000&q=80" */
 const PHOTOS = {
-  hero: "https://images.unsplash.com/photo-1707190205120-228c6656086c?auto=format&fit=crop&w=2200&q=75",          // villa and pool at dusk (wide)
-  sidr: "https://images.unsplash.com/photo-1707189856923-46dd41ea2bdc?auto=format&fit=crop&w=1400&q=75",          // The Sidr exterior
+  hero: "https://images.unsplash.com/photo-1670589953882-b94c9cb380f5?auto=format&fit=crop&w=2200&q=75",          // villa and pool at dusk (wide)
+  sidr: "https://images.unsplash.com/photo-1685514823717-7e1ff6ee0563?auto=format&fit=crop&w=1400&q=75",          // The Sidr exterior
   sidr2: "https://images.unsplash.com/photo-1758448755778-90ebf4d0f1e7?auto=format&fit=crop&w=1400&q=75",         // living room
   sidr3: "https://images.unsplash.com/photo-1758448755969-8791367cf5c5?auto=format&fit=crop&w=1400&q=75",         // master bedroom or kitchen
   ghaf: "https://images.unsplash.com/photo-1745761320791-5ae142edee8c?auto=format&fit=crop&w=1400&q=75",          // The Ghaf exterior or living room
   ghaf2: "https://images.unsplash.com/photo-1757924461488-ef9ad0670978?auto=format&fit=crop&w=1400&q=75",
   ghaf3: "https://images.unsplash.com/photo-1671197244266-73129c97c096?auto=format&fit=crop&w=1400&q=75",
-  talh: "https://images.unsplash.com/photo-1779487552425-65861889810b?auto=format&fit=crop&w=1400&q=75",          // The Talh terrace
+  talh: "https://images.unsplash.com/photo-1678575326996-a1bf09b86158?auto=format&fit=crop&w=1400&q=75",          // The Talh terrace
   talh2: "https://images.unsplash.com/photo-1768144092684-c1a5dd6c7aad?auto=format&fit=crop&w=1400&q=75",
   talh3: "https://images.unsplash.com/photo-1750420556288-d0e32a6f517b?auto=format&fit=crop&w=1400&q=75",
   life: "https://images.unsplash.com/photo-1766867054439-bc2f50974f02?auto=format&fit=crop&w=1400&q=75",          // shaded garden seating
-  pool: "https://images.unsplash.com/photo-1698653223783-d6cce8281606?auto=format&fit=crop&w=1400&q=75",          // pool with palms
+  pool: "https://images.unsplash.com/photo-1610641818989-c2051b5e2cfd?auto=format&fit=crop&w=1400&q=75",          // pool with palms
   gym: "https://images.unsplash.com/photo-1758957646695-ec8bce3df462?auto=format&fit=crop&w=1400&q=75",           // fitness centre
   courts: "https://images.unsplash.com/photo-1689942963385-f5bd03f3b270?auto=format&fit=crop&w=1400&q=75",        // padel or tennis court
   kids: "https://images.unsplash.com/photo-1772209177472-fc37fdfd4484?auto=format&fit=crop&w=1400&q=75",          // children's club or playground
   cafe: "https://images.unsplash.com/photo-1751956066306-c5684cbcf385?auto=format&fit=crop&w=1400&q=75",          // cafe or clubhouse
-  gate: "https://images.unsplash.com/photo-1707190205530-ca42118cb43f?auto=format&fit=crop&w=1400&q=75"           // entrance gate
+  gate: "https://images.unsplash.com/photo-1674222709212-a6a7e378ac40?auto=format&fit=crop&w=1400&q=75"           // entrance gate
 };
 
 const SITE = {

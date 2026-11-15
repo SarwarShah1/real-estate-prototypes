@@ -254,3 +254,13 @@ summary{cursor:pointer;font-weight:500;color:var(--teal)} details p{margin:.7em 
   .cmp-bar{bottom:74px}.cmp{display:block;overflow-x:auto}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* photos and icons */
+img.photo{display:block;width:100%;height:100%;object-fit:cover}
+.card-img,.gallery>div,.proj .pi{background:#e9e2d3}
+.hero-art{opacity:.62}
+.ti{font-size:1.15em;line-height:1;vertical-align:-.14em}
+.ic .ti{font-size:1.5rem;color:var(--teal2)}.dark .ic .ti{color:var(--gold2)}
+.trust i i,.logo i i{width:auto;height:auto;background:none;border-radius:0;display:inline;font-size:1.25rem;color:var(--teal2)}
+.fav .ti{font-size:1.15rem}.amen .ti{color:var(--teal2);margin-inline-end:4px}
+.specs .ti,.loc .ti{color:var(--mute)}
