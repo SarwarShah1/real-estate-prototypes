@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sarwarshah1.github.io/real-estate-prototypes/sarh/sitemap.xml

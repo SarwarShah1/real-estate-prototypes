@@ -175,3 +175,6 @@ input[type=range]{width:100%;accent-color:var(--navy)}output{font-weight:500;col
 .wide .card-b p{color:var(--muted)}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 @media print{.site-header,.topbar,.site-footer,.wa-float,.consent-bar,.subnav,.contact-bar,.reg-band{display:none}}
+.split>*,.reg-grid>*,.siteplan>*,.finder>*,.calc>*,.d-top>*{min-width:0}
+.table-wrap,.sp-map,.stack{position:relative}
+[hidden]{display:none!important}
